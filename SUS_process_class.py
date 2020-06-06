@@ -3,6 +3,12 @@
 Created on Sat Jul 13 19:29:15 2019
 
 @author: Ainara Garzo
+
+This script reads CSV format files:
+- first line with questions or questions numbers (it is excluded of the process)
+- first row with the users IDs: it is used to give the results for each user
+- each user answers must be distributed in lines
+
 """
 
 import csv
@@ -18,8 +24,7 @@ class SUS_quest:
     
     
     def open_csv(self):
-        '''CSV format: first line with questions numbers
-                        following lines with answers for each user'''
+        
         
         extension = ["*.csv"]
 
@@ -65,7 +70,8 @@ class SUS_quest:
         
         i = 0      
     
-        while i < len(val_num):
+        while i < len(val_num)-1:
+            print ("i: " + str(i) + " val_num: " + str(len(val_num)))
             result = result + (int (val_num[i])-1)
             result = result + (5-int (val_num[i+1]))
             
