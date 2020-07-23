@@ -2,18 +2,21 @@ Copyright Tecnalia 2020
 
 This a script for the SUS (Sytem Usability Scale) questionnaire process implemented in Python.
 
-'SUS_process_class.py' measures the SUS score in percentage for each participant and the average score for all the participants, by reading the data provided in a 'csv' file.
+`SUS_process_class.py` measures the SUS score in percentage for each participant and the average score for all the participants, by reading the data provided in a `csv` file.
 The 'csv' file will contain:
-- first row with questions or questions numbers. This first line will be excluded for the process.
-- first column with the users IDs. This information will be used to give the results for each user.
+
+- first row with questions or questions numbers.
+  This first line will be excluded for the process.
+- first column with the users IDs.
+  This information will be used to give the results for each user.
 - each user answers must be distributed in rows.
-'csv' information will be divided with ';'.
+  `csv` information will be divided with ;`.
+
+== Installation
 
 Requires the following packages (install with 'conda'): unicodecsv, easygui, statistics
 
 And then run the following commands:
-
-== Installation
 
 [source, shell]
 ----
