@@ -14,6 +14,7 @@ The 'csv' file will contain:
 
 == Installation
 
+=== using Conda
 Requires the following packages (install with 'conda'): unicodecsv, easygui, statistics
 
 And then run the following commands:
@@ -25,12 +26,25 @@ conda install -c conda-forge easygui
 conda install -c conda-forge statistics
 ----
 
+=== using pip
+
+[source, shell]
+----
+sudo -H pip install virtualenv
+# create virtual environment
+virtualenv venv
+source venv/bin/activate
+pip install -r requirements.txt
+----
+
 == Usage
 
 [source, shell]
 ----
-
+python sus_questionnaire/sus_process_class.py
 ----
+
+An example file of input `csv` file is provided in `sus_questionnaire/test/`
 
 
 
