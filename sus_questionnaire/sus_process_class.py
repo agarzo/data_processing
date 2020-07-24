@@ -28,16 +28,12 @@ class SUS_quest:
         
         extension = ["*.csv"]
 
-        print "open the box"
-        
         fileName = eg.fileopenbox(msg="Open File",
                                  title="Control: fileopenbox",
                                  default='',
                                  filetypes=extension)
-        print "open the box2"
                        
         eg.msgbox(fileName, "fileopenbox", ok_button="Continuar")
-        print "open the box3"
             
         with open(fileName) as File:
             reader = csv.reader(File, delimiter=',', quotechar=',',
@@ -71,7 +67,7 @@ class SUS_quest:
         i = 0      
     
         while i < len(val_num)-1:
-            print ("i: " + str(i) + " val_num: " + str(len(val_num)))
+#            print ("i: " + str(i) + " val_num: " + str(len(val_num)))
             result = result + (int (val_num[i])-1)
             result = result + (5-int (val_num[i+1]))
             
