@@ -11,35 +11,36 @@ This script reads CSV format files:
 
 """
 
-import csv
-import easygui as eg
+#import csv
+#import easygui as eg
+import open_csv
 import statistics as stats
 
 class SUS_quest:
     def __init__(self):
         self.csv_values = []
         
-        self.open_csv()
-        self.calculate_SUS()
+#        self.open_csv()
+#        self.calculate_SUS()
     
     
-    def open_csv(self):
-        
-        
-        extension = ["*.csv"]
-
-        fileName = eg.fileopenbox(msg="Open File",
-                                 title="Control: fileopenbox",
-                                 default='',
-                                 filetypes=extension)
-                       
-        eg.msgbox(fileName, "fileopenbox", ok_button="Continuar")
-            
-        with open(fileName) as File:
-            reader = csv.reader(File, delimiter=',', quotechar=',',
-                                quoting=csv.QUOTE_MINIMAL)
-            for row in reader:
-                self.csv_values.append(row)
+#    def open_csv(self):
+#        
+#        
+#        extension = ["*.csv"]
+#
+#        fileName = eg.fileopenbox(msg="Open File",
+#                                 title="Control: fileopenbox",
+#                                 default='',
+#                                 filetypes=extension)
+#                       
+#        eg.msgbox(fileName, "fileopenbox", ok_button="Continuar")
+#            
+#        with open(fileName) as File:
+#            reader = csv.reader(File, delimiter=',', quotechar=',',
+#                                quoting=csv.QUOTE_MINIMAL)
+#            for row in reader:
+#                self.csv_values.append(row)
     
     
     def calculate_SUS (self):
@@ -80,6 +81,9 @@ class SUS_quest:
         #mean calculation for each participant's result
         return (stats.mean(SUS))
 
-if __name__ == '__main__': 
-      
+if __name__ == '__main__':     
     SUSQ = SUS_quest()
+    SUSQ.csv_values = open_csv.main()
+    if SUSQ.csv_values != None:
+        SUSQ.calculate_SUS()
+    else: pass
