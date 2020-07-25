@@ -11,38 +11,15 @@ This script reads CSV format files:
 
 """
 
-#import csv
-#import easygui as eg
 import open_csv
 import statistics as stats
+import write_on_file
 
 class SUS_quest:
     def __init__(self):
         self.csv_values = []
-        
-#        self.open_csv()
-#        self.calculate_SUS()
-    
-    
-#    def open_csv(self):
-#        
-#        
-#        extension = ["*.csv"]
-#
-#        fileName = eg.fileopenbox(msg="Open File",
-#                                 title="Control: fileopenbox",
-#                                 default='',
-#                                 filetypes=extension)
-#                       
-#        eg.msgbox(fileName, "fileopenbox", ok_button="Continuar")
-#            
-#        with open(fileName) as File:
-#            reader = csv.reader(File, delimiter=',', quotechar=',',
-#                                quoting=csv.QUOTE_MINIMAL)
-#            for row in reader:
-#                self.csv_values.append(row)
-    
-    
+        self.wfileName = []
+            
     def calculate_SUS (self):
         results = [] 
         results2 = []
@@ -57,6 +34,7 @@ class SUS_quest:
         
         final_result = self.mean (results2)
         print "The result of SUS questionnaires is: " + str(final_result)
+        return results2, final_result
     
     def participant_SUS (self, val_num):
         #SUS value calculation for each participant (using each row values)
@@ -84,6 +62,9 @@ class SUS_quest:
 if __name__ == '__main__':     
     SUSQ = SUS_quest()
     SUSQ.csv_values = open_csv.main()
+    SUSQ.wfileName = write_on_file.get_file_name()
     if SUSQ.csv_values != None:
-        SUSQ.calculate_SUS()
+        results2, final_result = SUSQ.calculate_SUS()
+        out_file = write_on_file.open_file(SUSQ.wfileName)
+        write_on_file.write_data_on_file(results2, final_result, out_file)
     else: pass

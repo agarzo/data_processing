@@ -3,6 +3,9 @@
 Created on Sat Jul 25 10:11:25 2020
 
 @author: Ainara Garzo
+
+open csv files and include the data in 'csv_values' structure.
+use browser for selecting the appropriate csv file.
 """
 
 import csv
@@ -26,18 +29,17 @@ def open_window():
                              filetypes=extension)
                    
     eg.msgbox(fileName, "fileopenbox", ok_button="Continue")
-#    print fileName
     
     return fileName
 
 def open_csv(fileName):
     
     csv_values = []
-#    print fileName            
+          
     with open(fileName) as File:
         reader = csv.reader(File, delimiter=',', quotechar=',',
                             quoting=csv.QUOTE_MINIMAL)
         for row in reader:
             csv_values.append(row)
-#    print csv_values
+
     return csv_values
