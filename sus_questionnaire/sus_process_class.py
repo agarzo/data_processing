@@ -4,10 +4,14 @@ Created on Sat Jul 13 19:29:15 2019
 
 @author: Ainara Garzo
 
-This script reads CSV format files:
+Input --> csv format files:
 - first line with questions or questions numbers (it is excluded of the process)
 - first row with the users IDs: it is used to give the results for each user
 - each user answers must be distributed in lines
+
+Output --> csv format file: 
+- one row with each user ID and SUS value
+- last row with the mean value for all the users included in the input file
 
 """
 
@@ -27,14 +31,15 @@ class SUS_quest:
         for val in self.csv_values[1:len(self.csv_values)]:
             results.append(self.participant_SUS (val))
         
-        
-        for i in range (0, len(results)): 
-            results2.append(results[i][1])
-            print "The result for participant " + str (results[i][0]) + " is: " + str (results[i][1])
+        for item in results: 
+            results2.append(item[1])
         
         final_result = self.mean (results2)
+        
+        for item in results:
+            print "The result for participant " + str (item[0]) + " is: " + str (item[1])
         print "The result of SUS questionnaires is: " + str(final_result)
-        return results2, final_result
+        return results, final_result
     
     def participant_SUS (self, val_num):
         #SUS value calculation for each participant (using each row values)
@@ -46,7 +51,6 @@ class SUS_quest:
         i = 0      
     
         while i < len(val_num)-1:
-#            print ("i: " + str(i) + " val_num: " + str(len(val_num)))
             result = result + (int (val_num[i])-1)
             result = result + (5-int (val_num[i+1]))
             
@@ -55,16 +59,24 @@ class SUS_quest:
         result = result * 2.5
         return part_num, result
     
-    def mean (self, SUS):
+    def mean (self, participants_values):
         #mean calculation for each participant's result
-        return (stats.mean(SUS))
+        return (stats.mean(participants_values))
 
 if __name__ == '__main__':     
     SUSQ = SUS_quest()
-    SUSQ.csv_values = open_csv.main()
-    SUSQ.wfileName = write_on_file.get_file_name()
-    if SUSQ.csv_values != None:
-        results2, final_result = SUSQ.calculate_SUS()
-        out_file = write_on_file.open_file(SUSQ.wfileName)
-        write_on_file.write_data_on_file(results2, final_result, out_file)
-    else: pass
+    try: 
+        SUSQ.csv_values = open_csv.main()
+        if SUSQ.csv_values != None:
+            try: 
+                SUSQ.wfileName = write_on_file.get_file_name()
+                results, final_result = SUSQ.calculate_SUS()
+                out_file = write_on_file.open_file(SUSQ.wfileName)
+                write_on_file.write_data_on_file(results, final_result, out_file)
+            except:
+                print("That was no valid name.")
+        else: pass
+    except: 
+        print "There is not file selected or selected file is not a csv."
+        
+    

@@ -15,12 +15,12 @@ def main():
     
     fileName = open_window()
     if fileName == None or fileName.find(".csv") < 1: 
-        print "There is not file selected or selected file is not a csv."
+        exit
     else: return open_csv(fileName)
 
 def open_window():
     
-        
+    #open browser to select the .csv file containing the data to be processed
     extension = ["*.csv"]
     
     fileName = eg.fileopenbox(msg="Open File",
@@ -35,7 +35,9 @@ def open_window():
 def open_csv(fileName):
     
     csv_values = []
-          
+    
+    #open the csv file giving the corresponding fileName string
+    #include the values in the csv_values structure
     with open(fileName) as File:
         reader = csv.reader(File, delimiter=',', quotechar=',',
                             quoting=csv.QUOTE_MINIMAL)
