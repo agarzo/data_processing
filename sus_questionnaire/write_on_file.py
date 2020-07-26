@@ -25,9 +25,9 @@ def write_data_on_file(results, final_result, outFile):
     
     #write the results on the csv and close the file
     for item in (results):
-        outFile.write(str(item[0]))
+        outFile.write(str(item.id))
         outFile.write(";")
-        outFile.write(str(item[1]))
+        outFile.write(str(item.values))
         outFile.write("\n")
     outFile.write ("mean;"+str(final_result))
     outFile.close()

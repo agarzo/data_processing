@@ -17,60 +17,63 @@ Output --> csv format file:
 
 import open_csv
 import statistics as stats
+import sus_values_class as svc
 import write_on_file
 
-class SUS_quest:
+class sus_quest:
     def __init__(self):
         self.csv_values = []
         self.wfileName = []
             
-    def calculate_SUS (self):
-        results = [] 
-        results2 = []
+    def calculate_sus (self):
+
+        pl = [] #participants data list
+        srl =[] #sus scores result list
         
-        for val in self.csv_values[1:len(self.csv_values)]:
-            results.append(self.participant_SUS (val))
+        for val in self.csv_values:
+            id_num,values=self.participant_sus (val)
+            sr = svc.sus_results(id_num,values)
+            pl.append(sr)
         
-        for item in results: 
-            results2.append(item[1])
+        for item in pl: 
+            srl.append(item.values)
+
+        final_result = self.mean (srl)
         
-        final_result = self.mean (results2)
-        
-        for item in results:
-            print "The result for participant " + str (item[0]) + " is: " + str (item[1])
+        for item in pl:
+            print "The result for participant " + str (item.id) + " is: " + str (item.values)
         print "The result of SUS questionnaires is: " + str(final_result)
         return results, final_result
     
-    def participant_SUS (self, val_num):
+    def participant_sus (self, val_num):
         #SUS value calculation for each participant (using each row values)
-        part_num, val_num = val_num[0].split(";", 1)
-
-        val_num = val_num.replace(";", "")
+        
         result = 0  
         
         i = 0      
     
-        while i < len(val_num)-1:
-            result = result + (int (val_num[i])-1)
-            result = result + (5-int (val_num[i+1]))
+        while i < len(val_num.values)-1:
+            result = result + (int (val_num.values[i])-1)
+            result = result + (5-int (val_num.values[i+1]))
             
             i = i + 2
             
         result = result * 2.5
-        return part_num, result
+
+        return val_num.id, result
     
     def mean (self, participants_values):
         #mean calculation for each participant's result
         return (stats.mean(participants_values))
 
 if __name__ == '__main__':     
-    SUSQ = SUS_quest()
+    SUSQ = sus_quest()
     try: 
         SUSQ.csv_values = open_csv.main()
         if SUSQ.csv_values != None:
             try: 
                 SUSQ.wfileName = write_on_file.get_file_name()
-                results, final_result = SUSQ.calculate_SUS()
+                results, final_result = SUSQ.calculate_sus()
                 out_file = write_on_file.open_file(SUSQ.wfileName)
                 write_on_file.write_data_on_file(results, final_result, out_file)
             except:

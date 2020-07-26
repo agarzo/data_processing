@@ -6,3 +6,4 @@ set -e
 conda install -c conda-forge setuptools
 conda install -c conda-forge easygui
 conda install -c conda-forge statistics
+conda install -c conda-forge r-sys

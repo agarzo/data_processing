@@ -46,7 +46,8 @@ pip install -r requirements.txt
 python sus_questionnaire/sus_process_class.py
 ----
 
-An example file of input `csv` file is provided in `sus_questionnaire/test/`
+An example file of input [testdata] `csv` file are provided in `sus_questionnaire/test/`
+The result of the data process is provided on the `sus_questionnaire/test/testresult.csv` file
 
 
 
