@@ -43,7 +43,7 @@ class sus_quest:
         for item in pl:
             print "The result for participant " + str (item.id) + " is: " + str (item.values)
         print "The result of SUS questionnaires is: " + str(final_result)
-        return results, final_result
+        return pl, final_result
     
     def participant_sus (self, val_num):
         #SUS value calculation for each participant (using each row values)
@@ -77,8 +77,8 @@ if __name__ == '__main__':
                 out_file = write_on_file.open_file(SUSQ.wfileName)
                 write_on_file.write_data_on_file(results, final_result, out_file)
             except:
-                print("That was no valid name.")
-        else: pass
+                print "That was no valid name."
+        else: print "That was no valid name."
     except: 
         print "There is not file selected or selected file is not a csv."
         
