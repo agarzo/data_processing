@@ -10,7 +10,7 @@ The 'csv' file will contain:
   This first line will be excluded for the process.
 * first column with the users IDs.
   This information will be used to give the results for each user.
-- each participants' answers must be distributed in rows: one value for each question.
+* each participants' answers must be distributed in rows: one value for each question.
   if any answer is missing, it will be replaced with a '3' according to Bangor et al., 2009 to calculate the final score
   Used delimitator for `csv` file must be `;`.
 
