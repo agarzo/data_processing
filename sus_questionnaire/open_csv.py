@@ -54,7 +54,7 @@ def open_csv(fileName):
                 sv = svc.sus_values("ID"+i)
                 sv.add_values(row)
             else: 
-                print "The file has not the appropriated format"
+                print "There is not file selected or selected file has not appropriated format"
                 sys.exit()
             i=i+1       
             csv_values.append(sv)

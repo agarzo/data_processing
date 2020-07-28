@@ -19,6 +19,7 @@ import open_csv
 import statistics as stats
 import sus_values_class as svc
 import write_on_file
+import sys
 
 class sus_quest:
     def __init__(self):
@@ -29,6 +30,14 @@ class sus_quest:
 
         pl = [] #participants data list
         srl =[] #sus scores result list
+        
+        for i,val in enumerate(self.csv_values):
+            for x,item in enumerate(val.values):
+                try:
+                    self.csv_values[i].values[x] = int(self.csv_values[i].values[x])
+                except ValueError:
+                    print "The file has not the appropriated format"
+                    return [], None
         
         for val in self.csv_values:
             id_num,values=self.participant_sus (val)
@@ -78,8 +87,8 @@ if __name__ == '__main__':
                 write_on_file.write_data_on_file(results, final_result, out_file)
             except:
                 print "That was no valid name."
-        else: print "That was no valid name."
+        else: print "There is not file selected or selected file has not appropriated format"
     except: 
-        print "There is not file selected or selected file is not a csv."
+        print "There is not file selected or selected file has not appropriated format"
         
     

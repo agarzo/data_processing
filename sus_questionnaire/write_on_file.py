@@ -6,6 +6,7 @@ Created on Sat Jul 25 15:57:37 2020
 
 open a csv file and writting the results on it
 """
+import sys
 
 def get_file_name():
     
@@ -24,10 +25,11 @@ def open_file(fileName):
 def write_data_on_file(results, final_result, outFile):
     
     #write the results on the csv and close the file
-    for item in (results):
-        outFile.write(str(item.id))
-        outFile.write(";")
-        outFile.write(str(item.values))
-        outFile.write("\n")
-    outFile.write ("mean;"+str(final_result))
-    outFile.close()
+    if results != [] and final_result != None:
+        for item in (results):
+            outFile.write(str(item.id))
+            outFile.write(";")
+            outFile.write(str(item.values))
+            outFile.write("\n")
+        outFile.write ("mean;"+str(final_result))
+        outFile.close()
